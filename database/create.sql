@@ -24,13 +24,20 @@ CREATE TABLE admins(
 CREATE TABLE items(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(30) NULL,
-	price int NULL
+	price int NULL,
+    orderCount int DEFAULT 0
 );
 
-CREATE TABLE userItems(
+CREATE TABLE orderStatus(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE userOrders(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	userId INT NOT NULL,
     itemId INT NOT NULL,
+    orderStatus INT DEFAULT 1,
     
     FOREIGN KEY (userId)
         REFERENCES users(id)
@@ -38,5 +45,11 @@ CREATE TABLE userItems(
         
 	FOREIGN KEY (itemId)
         REFERENCES items(id)
+        ON DELETE NO ACTION,
+	
+    FOREIGN KEY (orderStatus)
+        REFERENCES orderStatus(id)
         ON DELETE NO ACTION
 );
+
+INSERT INTO orderStatus (name) VALUES ("New"), ("Confirmed"), ("Canceled"), ("Delivedred");
