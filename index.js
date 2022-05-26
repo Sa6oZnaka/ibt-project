@@ -29,7 +29,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(express.static('public'));
-require('./route')(app, passport);
+require('./routes/route')(app, passport);
 
 
 const port = 3000;
@@ -37,7 +37,6 @@ const port = 3000;
 app.get('/', function(req, res) {
     res.send("123");
 });
-
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)

@@ -26,3 +26,17 @@ CREATE TABLE items(
 	name VARCHAR(30) NULL,
 	price int NULL
 );
+
+CREATE TABLE userItems(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	userId INT NOT NULL,
+    itemId INT NOT NULL,
+    
+    FOREIGN KEY (userId)
+        REFERENCES users(id)
+        ON DELETE NO ACTION,
+        
+	FOREIGN KEY (itemId)
+        REFERENCES items(id)
+        ON DELETE NO ACTION
+);

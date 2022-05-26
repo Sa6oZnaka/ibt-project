@@ -41,6 +41,10 @@
 
         Hello <%= user.username %>!
 
+        <% if(user.isAdmin){ %>
+          Admin
+        <% } %>
+
         <input id="username" type="hidden" value="<%= user.username %>"/>
 
         
