@@ -54,6 +54,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Име</th>
+                  <th scope="col">Поръчал</th>
                   <th scope="col">Статус</th>
                   <th scope="col">Действия</th>
                 </tr>
@@ -63,16 +64,17 @@
                 <tr>
                     <td><%= items[i].id %></td>
                     <td><%= items[i].name %></td>
+                    <td><%= items[i].orderedBy %></td>
                     <td><%= items[i].status %></td>
 
                     <td>
                         <% if(items[i].statusId == 1){ %>
-                            <a class="btn btn-success" href="#" role="button">Одобри</a>
-                            <a class="btn btn-danger" href="#" role="button">Откажи</a>
+                            <a class="btn btn-success" href="/setOrderStatus/<%= items[i].id %>/2" role="button">Одобри</a>
+                            <a class="btn btn-danger" href="/setOrderStatus/<%= items[i].id %>/3" role="button">Откажи</a>
                         <% } %>
 
                         <% if(items[i].statusId == 2){ %>
-                            <a class="btn btn-primary" href="#" role="button">Завърши</a>
+                            <a class="btn btn-primary" href="/setOrderStatus/<%= items[i].id %>/4" role="button">Завърши</a>
                         <% } %>
                     </td>
                     

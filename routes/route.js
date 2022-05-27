@@ -76,6 +76,26 @@ module.exports = function(app, passport, dbProvider) {
         });
     });
 
+    app.get('/setOrderStatus/:id/:newStatus', isLoggedIn, async function(req, res) {
+        if(req.user.isAdmin == 0){
+            res.redirect("/");
+        }
+
+        let currentStatus = await dbProvider.GetOrderStatus(req.params.id);
+        currentStatus = currentStatus[0].orderStatus;
+
+        if((currentStatus == 1 && req.params.newStatus == 4) ||
+            (currentStatus == 2 && req.params.newStatus == 3) ||
+            (currentStatus == 2 && req.params.newStatus == 1) ||
+            currentStatus == 3 ||
+            currentStatus == 4)
+            res.redirect("/");
+
+        await dbProvider.UpdateOrderStatus(req.params.id, req.params.newStatus);
+
+        res.redirect("/allOrders");
+    });
+
     app.get('/logout', function(req, res) {
         req.session.destroy(function(err) {
             res.redirect('/login');
