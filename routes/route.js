@@ -55,19 +55,25 @@ module.exports = function(app, passport, dbProvider) {
         });
     });
 
-    app.get('/order/:id', isLoggedIn, async function(req, res) {
-       
-        let result = await dbProvider.AddOrder(req.params.id, req.user.id);
+    app.get('/allOrders', isLoggedIn, async function(req, res) {
+        let items = await dbProvider.AllOrders();
         
-        res.send(result);
+        if(req.user.isAdmin == 0){
+            res.redirect("/");
+        }
 
-        //let items = await dbProvider.GetOrders(req.user.id);
-        //console.log(items);
-        //console.log(req);
-        //res.render('orders.ejs', {
-        //    user: req.user,
-        //    items: items
-        //});
+        res.render('allOrders.ejs', {
+            user: req.user,
+            items: items
+        });
+    });
+
+    app.get('/order/:id', isLoggedIn, async function(req, res) {
+        await dbProvider.AddOrder(req.params.id, req.user.id);
+        
+        res.render('orderCompleate.ejs', {
+            user: req.user
+        });
     });
 
     app.get('/logout', function(req, res) {
