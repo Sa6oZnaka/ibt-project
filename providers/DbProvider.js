@@ -14,7 +14,13 @@ module.exports = class DbContext{
     }
 
     GetItems = () => {
-        let query = 'SELECT * FROM items;';
+        let query = "SELECT " +
+        "i.*, " +
+        "COUNT(uo.id) AS orderCount " +
+        "FROM " +
+        "items i " +
+        "LEFT JOIN userOrders uo ON i.id = uo.itemId " +
+        "GROUP BY i.name;";
 
         return new Promise((resolve, reject) => 
         {
@@ -45,7 +51,7 @@ module.exports = class DbContext{
 
     AddOrder = (itemId, userId) => {
         let query = 'INSERT INTO userOrders (itemId, userId) VALUES (?, ?);';
-        
+
         return new Promise((resolve, reject) => 
         {
             this.connection.query(query, [itemId, userId], (error, results) => 

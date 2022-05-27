@@ -26,8 +26,7 @@ CREATE TABLE items(
 	name VARCHAR(30) NULL,
 	description VARCHAR(200) NULL,
 	price float NULL,
-    src VARCHAR(500) NULL,
-    orderCount int DEFAULT 0
+    src VARCHAR(500) NULL
 );
 
 CREATE TABLE orderStatus(
