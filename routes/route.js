@@ -45,6 +45,31 @@ module.exports = function(app, passport, dbProvider) {
         });
     });
 
+    app.get('/orders', isLoggedIn, async function(req, res) {
+        let items = await dbProvider.GetOrders(req.user.id);
+        //console.log(items);
+        //console.log(req);
+        res.render('orders.ejs', {
+            user: req.user,
+            items: items
+        });
+    });
+
+    app.get('/order/:id', isLoggedIn, async function(req, res) {
+       
+        let result = await dbProvider.AddOrder(req.params.id, req.user.id);
+        
+        res.send(result);
+
+        //let items = await dbProvider.GetOrders(req.user.id);
+        //console.log(items);
+        //console.log(req);
+        //res.render('orders.ejs', {
+        //    user: req.user,
+        //    items: items
+        //});
+    });
+
     app.get('/logout', function(req, res) {
         req.session.destroy(function(err) {
             res.redirect('/login');

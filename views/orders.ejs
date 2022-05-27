@@ -19,11 +19,11 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="orders">Orders</a>
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Orders<span class="sr-only">(current)</span></a>
                 </li>
               </ul>
 
@@ -41,42 +41,20 @@
             </div>
           </nav>
 
-
-        Hello <%= user.username %>!
-
-        <% if(user.isAdmin){ %>
-          Admin
-        <% } %>
-
-        <input id="username" type="hidden" value="<%= user.username %>"/>
-
         <div class="mx-auto" style="width: 1200px;">
         <div class="d-flex1 justify-content-center">
 
-          <div class="card-columns">
-
+        <ul class="list-group">
             
-        <% for(let i = 0; i < items.length; i++) {%>
+            <% for(let i = 0; i < items.length; i++) {%>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <%= items[i].name %>
+                <span class="badge badge-primary badge-pill"><%= items[i].status %></span>
+                </li>
+            <% } %>
+        </ul>
 
-          
-          <div class="card" style="width: 400px;">
-            <img class="card-img-top" src="<%= items[i].src %>" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title"><%= items[i].name %></h5>
-              <p class="card-text"><%= items[i].description %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><%= items[i].price %> лв.</li>
-              <li class="list-group-item">Orders: <%= items[i].orderCount %></li>
-            </ul>
-            <div class="card-body">
-              <a href="/order/<%= items[i].id %>" class="card-link">Order</a>
-            </div>
-          </div>
-
-
-        <% } %>
-      </div></div>
+      </div>
     </div>
 
 
