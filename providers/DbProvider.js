@@ -33,7 +33,7 @@ module.exports = class DbContext{
 
     GetOrders = (userId) => {
         let query = 
-        "SELECT i.name, os.name AS 'status' FROM userOrders uo " +
+        "SELECT i.name, os.name AS 'status', os.id AS 'statusId' FROM userOrders uo " +
         "LEFT JOIN items i " +
         "ON uo.itemId = i.id " + 
         "LEFT JOIN orderStatus os " +

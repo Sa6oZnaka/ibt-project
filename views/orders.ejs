@@ -21,7 +21,20 @@
             <% for(let i = 0; i < items.length; i++) {%>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <%= items[i].name %>
-                    <span class="badge badge-primary badge-pill"><%= items[i].status %></span>
+
+                    <% if(items[i].statusId == 1){ %>
+                        <span class="badge badge-primary badge-pill"><%= items[i].status %></span>
+                    <% } %>
+                    <% if(items[i].statusId == 2){ %>
+                        <span class="badge badge-success badge-pill"><%= items[i].status %></span>
+                    <% } %>
+                    <% if(items[i].statusId == 3){ %>
+                        <span class="badge badge-danger badge-pill"><%= items[i].status %></span>
+                    <% } %>
+                    <% if(items[i].statusId == 4){ %>
+                        <span class="badge badge-secondary badge-pill"><%= items[i].status %></span>
+                    <% } %>
+
                 </li>
             <% } %>
         </ul>
