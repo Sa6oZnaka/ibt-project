@@ -56,11 +56,11 @@ module.exports = function(app, passport, dbProvider) {
     });
 
     app.get('/allOrders', isLoggedIn, async function(req, res) {
-        let items = await dbProvider.AllOrders();
-        
         if(req.user.isAdmin == 0){
             res.redirect("/");
         }
+
+        let items = await dbProvider.AllOrders();
 
         res.render('allOrders.ejs', {
             user: req.user,
@@ -73,6 +73,19 @@ module.exports = function(app, passport, dbProvider) {
         
         res.render('orderCompleate.ejs', {
             user: req.user
+        });
+    });
+
+    app.get('/items', isLoggedIn, async function(req, res) {
+        if(req.user.isAdmin == 0){
+            res.redirect("/");
+        }
+
+        let items = await dbProvider.GetItems();
+
+        res.render('items.ejs', {
+            user: req.user,
+            items: items
         });
     });
 

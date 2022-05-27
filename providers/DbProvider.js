@@ -105,4 +105,16 @@ module.exports = class DbContext{
             });
         });
     }
+
+    GetItems = () => {
+        let query = 'SELECT * FROM items;';
+
+        return new Promise((resolve, reject) => 
+        {
+            this.connection.query(query, (error, results) => 
+            {
+                return resolve(results);
+            });
+        });
+    }
 }
