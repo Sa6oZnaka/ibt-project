@@ -13,7 +13,7 @@ module.exports = function (passport) {
     });
 
     passport.deserializeUser(function (id, done) {
-        connection.query("SELECT u.*, IF(a.id IS NULL,0,1) as 'isAdmin' FROM users u LEFT JOIN admins a ON u.id = ? AND u.id = a.userId", [id],
+        connection.query("SELECT u.*, IF(a.id IS NULL,0,1) as 'isAdmin' FROM users u LEFT JOIN admins a ON u.id = a.userId WHERE u.id = ?", [id],
             function (err, rows) {
                 done(err, rows[0]);
             });
