@@ -21,7 +21,7 @@ module.exports = class DbContext{
         {
             this.connection.query(query, (error, results) => 
             {
-                return resolve(res);
+                return resolve(results);
             });
         });
     }

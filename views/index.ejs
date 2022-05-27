@@ -47,6 +47,36 @@
 
         <input id="username" type="hidden" value="<%= user.username %>"/>
 
+        <div class="mx-auto" style="width: 1200px;">
+        <div class="d-flex1 justify-content-center">
+
+          <div class="card-columns">
+
+            
+        <% for(let i = 0; i < items.length; i++) {%>
+
+          
+          <div class="card" style="width: 400px;">
+            <img class="card-img-top" src="<%= items[i].src %>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= items[i].name %></h5>
+              <p class="card-text"><%= items[i].description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= items[i].price %> лв.</li>
+              <li class="list-group-item">Orders: <%= items[i].orderCount %></li>
+            </ul>
+            <div class="card-body">
+              <a href="/order/<%= items[i].id %>" class="card-link">Order</a>
+            </div>
+          </div>
+
+
+        <% } %>
+      </div></div>
+    </div>
+
+
         
     </body>
 

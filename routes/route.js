@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, dbProvider) {
 
     app.get('/login', function(req, res) {
         res.render('login.ejs', {
@@ -35,10 +35,13 @@ module.exports = function(app, passport) {
         failureFlash: true
     }));
 
-    app.get('/', isLoggedIn, function(req, res) {
+    app.get('/', isLoggedIn, async function(req, res) {
+        let items = await dbProvider.GetItems();
+        //console.log(items);
         //console.log(req);
         res.render('index.ejs', {
-            user: req.user
+            user: req.user,
+            items: items
         });
     });
 

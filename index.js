@@ -1,24 +1,19 @@
-let express = require('express');
-let session = require('express-session');
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const dbConfig = require('./config/db');
+const passport = require('passport');
+const flash = require('connect-flash');
+const DbProvider = require('./providers/DbProvider')
+
 let app = express();
-let http = require('http').Server(app);
-
-let bodyParser = require('body-parser');
-let cookieParser = require('cookie-parser');
-let dbconfig = require('./config/db');
-
-let passport = require('passport');
-let flash = require('connect-flash');
-require('./passport')(passport);
-
 app.set('views', __dirname + '/views');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 app.set('view engine', 'ejs');
-
 app.use(session({
     secret: 'justasecret',
     resave: true,
@@ -29,15 +24,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(express.static('public'));
-require('./routes/route')(app, passport);
 
+let dbProvider = new DbProvider(dbConfig);
+
+require('./routes/route')(app, passport, dbProvider);
+require('./passport')(passport, dbProvider);
 
 const port = 3000;
-
-app.get('/', function(req, res) {
-    res.send("123");
-});
-
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
 })
