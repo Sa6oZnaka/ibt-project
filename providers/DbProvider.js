@@ -133,4 +133,16 @@ module.exports = class DbContext{
             });
         });
     }
+
+    AddReview = (userId, itemId, rating, text) => {
+        let query = "INSERT INTO userReviews (itemId, userId, text, rating) VALUES (?, ?, ?, ?);"
+        
+        return new Promise((resolve, reject) => 
+        {
+            this.connection.query(query, [itemId, userId, text, rating], (error, results) => 
+            {
+                return resolve(results);
+            });
+        });
+    }
 }

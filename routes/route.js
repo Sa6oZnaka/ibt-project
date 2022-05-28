@@ -125,6 +125,20 @@ module.exports = function(app, passport, dbProvider) {
             res.redirect('/login');
         });
     })
+
+    app.get('/newReview/:itemId', isLoggedIn, async function(req, res) {
+        let itemId = req.params.itemId;
+
+        if(! req.params.inlineRadioOptions || ! req.params.text)
+            res.redirect('/');
+
+        let text = req.query.text;
+        let rating = parseInt(req.query.inlineRadioOptions);
+
+        await dbProvider.AddReview(req.user.id, itemId, rating, text);
+
+        //res.send("OK!!!");
+    });
 };
 
 function isLoggedIn(req, res, next) {
