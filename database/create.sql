@@ -53,6 +53,22 @@ CREATE TABLE userOrders(
         ON DELETE NO ACTION
 );
 
+CREATE TABLE userReviews(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	userId INT NOT NULL,
+    itemId INT NOT NULL,
+    text varchar(50) NULL,
+    rating INT NOT NULL,
+
+    FOREIGN KEY (userId)
+        REFERENCES users(id)
+        ON DELETE NO ACTION,
+        
+	FOREIGN KEY (itemId)
+        REFERENCES items(id)
+        ON DELETE NO ACTION
+);
+
 INSERT INTO orderStatus (name) VALUES ("New"), ("Confirmed"), ("Canceled"), ("Delivedred");
 INSERT INTO items (name, description, price, src) VALUES 
 ("Когато Над Витоша Мръкне", "Черни и бели, размери от S-XXL", 29.99, "https://scontent.fsof9-1.fna.fbcdn.net/v/t1.6435-9/118780189_1844054425745298_1820077001096607349_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=n-WG48GPLUsAX8Zhj4n&_nc_ht=scontent.fsof9-1.fna&oh=00_AT_XKdViyN9IOikspeoZcb702oYVHts94i_SkNcuHtozUw&oe=62B6A78A"),

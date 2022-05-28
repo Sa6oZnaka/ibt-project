@@ -106,12 +106,28 @@ module.exports = class DbContext{
         });
     }
 
-    GetItems = () => {
-        let query = 'SELECT * FROM items;';
+    GetItem = (id) => {
+        let query = 'SELECT * FROM items WHERE id = ?;';
 
         return new Promise((resolve, reject) => 
         {
-            this.connection.query(query, (error, results) => 
+            this.connection.query(query, [id], (error, results) => 
+            {
+                return resolve(results[0]);
+            });
+        });
+    }
+
+    GetReviews = (itemId) => {
+        let query = 
+        "SELECT u.username, ur.rating, ur.text FROM userReviews ur " +
+        "LEFT JOIN users u " +
+        "ON u.id = ur.userId " +
+        "Where ur.itemId = ?;"
+
+        return new Promise((resolve, reject) => 
+        {
+            this.connection.query(query, [itemId], (error, results) => 
             {
                 return resolve(results);
             });

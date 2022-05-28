@@ -89,6 +89,17 @@ module.exports = function(app, passport, dbProvider) {
         });
     });
 
+    app.get('/item/:id', isLoggedIn, async function(req, res) {
+        let item = await dbProvider.GetItem(req.params.id);
+        let reviews = await dbProvider.GetReviews(req.params.id);
+
+        res.render('item.ejs', {
+            user: req.user,
+            item: item,
+            reviews: reviews
+        });
+    });
+
     app.get('/setOrderStatus/:id/:newStatus', isLoggedIn, async function(req, res) {
         if(req.user.isAdmin == 0){
             res.redirect("/");
