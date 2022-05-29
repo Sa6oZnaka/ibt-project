@@ -1,63 +1,45 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
-
-        <meta charset="utf-8">
-        <title>IBT Web store</title>
-    </head>
-
-    <body>
-
-        <%- include('_navbar.ejs') %>
-
-        <div class="mx-auto" style="width: 1200px;">
-        <div class="d-flex1 justify-content-center">
-
-        <table class="table">
-            <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Име</th>
-                  <th scope="col">Цена</th>
-                  <th scope="col">Действия</th>
-                </tr>
-              </thead>
-            <tbody>
-
-        <form action="/newItem" method="get">
-           
-            <input class="form-control" placeholder="Име" type="text" name="name"></input>
-            <input class="form-control" placeholder="Цена" type="text" name="price"></input>
-            <input class="form-control" placeholder="Адрес на снимка" type="text" name="url"></input>
-
-            <input type="submit" value="Добави нов продукт" class="btn btn-primary">
-        </form>
-
-
-            <% for(let i = 0; i < items.length; i++) {%>
-                <tr>
-                    <td><%= items[i].id %></td>
-                    <td><%= items[i].name %></td>
-                    <td><%= items[i].price %></td>
-
-                    <td>
+   <head>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+      <meta charset="utf-8">
+      <title>IBT Web store</title>
+   </head>
+   <body>
+      <%- include('_navbar.ejs') %>
+      <div class="mx-auto" style="width: 1200px; padding-top: 10px;">
+         <div class="d-flex1 justify-content-center">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Име</th>
+                     <th scope="col">Цена</th>
+                     <th scope="col">Действия</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <form action="/newItem" method="get">
+                     <input class="form-control" placeholder="Име" type="text" name="name"></input>
+                     <input class="form-control" placeholder="Цена" type="text" name="price"></input>
+                     <input class="form-control" placeholder="Адрес на снимка" type="text" name="url"></input>
+                     <input type="submit" value="Добави нов продукт" class="btn btn-primary">
+                  </form>
+                  <% for(let i = 0; i < items.length; i++) {%>
+                  <tr>
+                     <td><%= items[i].id %></td>
+                     <td><%= items[i].name %></td>
+                     <td><%= items[i].price %></td>
+                     <td>
                         <a class="btn btn-primary" href="/item/edit/<%= items[i].id %>" role="button">Редактиране</a>
                         <a class="btn btn-danger" href="/removeItem/<%= items[i].id %>" role="button">Изтрии</a>
                         <a class="btn btn-secondary" href="/item/<%= items[i].id %>" role="button">Виж</a>
-                    </td>
-                    
-                </tr>
-            <% } %>
-        </table>
-
+                     </td>
+                  </tr>
+                  <% } %>
+            </table>
+         </div>
       </div>
-    </div>
-
-
-        
-    </body>
-
+   </body>
 </html>
