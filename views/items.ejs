@@ -23,6 +23,7 @@
                   <form action="/newItem" method="get">
                      <input class="form-control" placeholder="Име" type="text" name="name"></input>
                      <input class="form-control" placeholder="Цена" type="text" name="price"></input>
+                     <input class="form-control" placeholder="Описание" type="text" name="description"></input>
                      <input class="form-control" placeholder="Адрес на снимка" type="text" name="url"></input>
                      <input type="submit" value="Добави нов продукт" class="btn btn-primary">
                   </form>
@@ -32,7 +33,7 @@
                      <td><%= items[i].name %></td>
                      <td><%= items[i].price %></td>
                      <td>
-                        <a class="btn btn-primary" href="/item/edit/<%= items[i].id %>" role="button">Редактиране</a>
+                        <a class="btn btn-primary" href="/editItem/<%= items[i].id %>" role="button">Редактиране</a>
                         <a class="btn btn-danger" href="/removeItem/<%= items[i].id %>" role="button">Изтрии</a>
                         <a class="btn btn-secondary" href="/item/<%= items[i].id %>" role="button">Виж</a>
                      </td>

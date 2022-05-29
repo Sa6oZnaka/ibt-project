@@ -21,11 +21,12 @@ module.exports = function(app, dbProvider) {
         let name = req.query.name;
         let price = parseInt(req.query.price);
         let url = req.query.url;
+        let description = req.query.description;
 
         if(name == null || price == null || url == null)
             res.redirect('/');
             
-        await dbProvider.AddItem(name, price, url);
+        await dbProvider.AddItem(name, price, url, description);
 
         res.redirect('/items');
     });
@@ -36,6 +37,24 @@ module.exports = function(app, dbProvider) {
         }
         
         await dbProvider.RemoveItem(req.params.id);
+
+        res.redirect('/items');
+    });
+
+    app.get('/edit/:id', isLoggedIn, async function(req, res) {
+        if(req.user.isAdmin == 0){
+            res.redirect("/");
+        }
+        
+        let name = req.query.name;
+        let price = parseInt(req.query.price);
+        let url = req.query.url;
+        let description = req.query.description;
+
+        if(name == null || price == null || url == null)
+            res.redirect('/');
+
+        await dbProvider.EditItem(req.params.id, name, price, url, description);
 
         res.redirect('/items');
     });
@@ -61,6 +80,15 @@ module.exports = function(app, dbProvider) {
             user: req.user,
             item: item,
             reviews: reviews
+        });
+    });
+
+    app.get('/editItem/:id', isLoggedIn, async function(req, res) {
+        let item = await dbProvider.GetItem(req.params.id);
+        
+        res.render('editItem.ejs', {
+            user: req.user,
+            item: item
         });
     });
 }

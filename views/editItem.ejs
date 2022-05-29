@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link href="/style2.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+      <meta charset="utf-8">
+      <title>IBT Web store</title>
+   </head>
+   <body>
+      <%- include('_navbar.ejs') %>
+      <div class="mx-auto" style="width: 1200px; padding-top: 10px;">
+         <div class="d-flex1 justify-content-center">
+            <h2>Редактиране на продукт</h2>
+            <hr>
+            <form action="/edit/<%= item.id %>" method="get">
+                Име
+                <input class="form-control" placeholder="Име" type="text" name="name" value="<%= item.name %>"></input>
+                Цена
+                <input class="form-control" placeholder="Цена" type="text" name="price" value="<%= item.price %>"></input>
+                Описание
+                <input class="form-control" placeholder="Описание" type="text" name="description" value="<%= item.description %>"></input>
+                Адрес на изображение
+                <input class="form-control" placeholder="Адрес на изображение" type="text" name="url" value="<%= item.src %>"></input>
+                <input type="submit" value="Добре" class="btn btn-primary">
+            </form>
+        </div>
+      </div>
+   </body>
+</html>

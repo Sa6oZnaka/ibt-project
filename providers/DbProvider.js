@@ -146,12 +146,12 @@ module.exports = class DbContext{
         });
     }
 
-    AddItem = (name, price, url) => {
-        let query = "INSERT INTO items (name, price, src) VALUES (?, ?, ?);"
+    AddItem = (name, price, url, description) => {
+        let query = "INSERT INTO items (name, price, src, description) VALUES (?, ?, ?, ?);"
         
         return new Promise((resolve, reject) => 
         {
-            this.connection.query(query, [name, price, url], (error, results) => 
+            this.connection.query(query, [name, price, url, description], (error, results) => 
             {
                 return resolve(results);
             });
@@ -164,6 +164,18 @@ module.exports = class DbContext{
         return new Promise((resolve, reject) => 
         {
             this.connection.query(query, [id], (error, results) => 
+            {
+                return resolve(results);
+            });
+        });
+    }
+
+    EditItem = (id, name, price, url, description) => {
+        let query = "UPDATE items SET name = ?, price = ?, src = ?, description = ? WHERE id = ?"
+        
+        return new Promise((resolve, reject) => 
+        {
+            this.connection.query(query, [name, price, url, description, id], (error, results) => 
             {
                 return resolve(results);
             });
