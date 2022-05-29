@@ -46,7 +46,7 @@ CREATE TABLE userOrders(
         
 	FOREIGN KEY (itemId)
         REFERENCES items(id)
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE,
 	
     FOREIGN KEY (orderStatus)
         REFERENCES orderStatus(id)
@@ -66,7 +66,7 @@ CREATE TABLE userReviews(
         
 	FOREIGN KEY (itemId)
         REFERENCES items(id)
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
 );
 
 INSERT INTO orderStatus (name) VALUES ("New"), ("Confirmed"), ("Canceled"), ("Delivedred");

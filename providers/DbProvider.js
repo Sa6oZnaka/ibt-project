@@ -157,4 +157,18 @@ module.exports = class DbContext{
             });
         });
     }
+
+    RemoveItem = (id) => {
+        let query = "DELETE FROM items WHERE id = ?;"
+        
+        console.log(query, id);
+
+        return new Promise((resolve, reject) => 
+        {
+            this.connection.query(query, [id], (error, results) => 
+            {
+                return resolve(results);
+            });
+        });
+    }
 }

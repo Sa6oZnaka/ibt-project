@@ -149,10 +149,20 @@ module.exports = function(app, passport, dbProvider) {
         let price = parseInt(req.query.price);
         let url = req.query.url;
 
-        if(name != null && price != null && url != null)
+        if(name == null || price == null || url == null)
             res.redirect('/');
-
+            
         await dbProvider.AddItem(name, price, url);
+
+        res.redirect('/items');
+    });
+
+    app.get('/removeItem/:id', isLoggedIn, async function(req, res) {
+        if(req.user.isAdmin == 0){
+            res.redirect("/");
+        }
+        
+        await dbProvider.RemoveItem(req.params.id);
 
         res.redirect('/items');
     });
