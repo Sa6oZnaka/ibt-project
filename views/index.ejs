@@ -9,7 +9,7 @@
    <body>
       <%- include('_navbar.ejs') %>
       <% if(user.isAdmin){ %>
-      Logged in as admin
+      Вие сте администратор!
       <% } %>
       <input id="username" type="hidden" value="<%= user.username %>"/>
       <div class="mx-auto" style="width: 1200px; padding-top: 10px;">
@@ -24,11 +24,11 @@
                   </div>
                   <ul class="list-group list-group-flush">
                      <li class="list-group-item"><%= items[i].price %> лв.</li>
-                     <li class="list-group-item">Orders: <%= items[i].orderCount %></li>
+                     <li class="list-group-item">Поръчки: <%= items[i].orderCount %></li>
                   </ul>
                   <div class="card-body">
-                     <a href="/order/<%= items[i].id %>" class="card-link">Order</a>
-                     <a href="/item/<%= items[i].id %>" class="card-link">Reviews</a>
+                     <a href="/order/<%= items[i].id %>" class="card-link">Поръчай</a>
+                     <a href="/item/<%= items[i].id %>" class="card-link">Ревюта</a>
                   </div>
                </div>
                <% } %>

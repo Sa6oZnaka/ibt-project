@@ -59,7 +59,7 @@ module.exports = class DbContext{
         "ON uo.orderStatus = os.id " +
         "LEFT JOIN users u " +
         "ON u.id = uo.userId " +
-        "ORDER BY uo.orderStatus";
+        "ORDER BY uo.order_date desc";
 
         return new Promise((resolve, reject) => 
         {

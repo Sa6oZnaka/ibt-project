@@ -68,7 +68,7 @@ CREATE TABLE userReviews(
         ON DELETE CASCADE
 );
 
-INSERT INTO orderStatus (name) VALUES ("New"), ("Confirmed"), ("Canceled"), ("Delivedred");
+INSERT INTO orderStatus (name) VALUES ("Нова"), ("Потвърдена"), ("Отказана"), ("Завършена");
 INSERT INTO items (name, description, price, src) VALUES 
 ("Когато Над Витоша Мръкне", "Тениските “Когато Над Витоша Мръкне” вече са в продажба!", 29.99, "https://scontent.fsof9-1.fna.fbcdn.net/v/t1.6435-9/118780189_1844054425745298_1820077001096607349_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=n-WG48GPLUsAX8Zhj4n&_nc_ht=scontent.fsof9-1.fna&oh=00_AT_XKdViyN9IOikspeoZcb702oYVHts94i_SkNcuHtozUw&oe=62B6A78A"),
 ("Спаси и Сохрани", "Нови суичери Спаси и Сохрани вече са в продажба в неограничено количество", 59.99, "https://scontent.fsof9-1.fna.fbcdn.net/v/t1.6435-9/142200508_1980487448768661_1962692230367439682_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=6BkZNvFzCLgAX8nVGyv&_nc_ht=scontent.fsof9-1.fna&oh=00_AT9OZZNZM0qq8pGPnuOS-lpOWrDiOBesffalzLVQfGnihg&oe=62B598A0"),
