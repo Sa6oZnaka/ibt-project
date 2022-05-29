@@ -34,3 +34,10 @@ npm install
 ```sh
 node .
 ```
+
+## роля Admin
+За да си дадете роля админ, след регистрация, изпълене следната заявка в MySQL
+```sh
+INSERT into admins (userId) VALUES (1);
+```
+Където 1 е id-то на user-а, който искате да направите admin.
