@@ -6,9 +6,7 @@ CREATE TABLE users(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
     password VARCHAR(100) NOT NULL,
-	firstname VARCHAR(30) NULL,
-	lastname VARCHAR(30) NULL,
-	email VARCHAR(50),
+
 	reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
@@ -39,7 +37,8 @@ CREATE TABLE userOrders(
 	userId INT NOT NULL,
     itemId INT NOT NULL,
     orderStatus INT DEFAULT 1,
-    
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (userId)
         REFERENCES users(id)
         ON DELETE NO ACTION,

@@ -51,7 +51,7 @@ module.exports = class DbContext{
 
     AllOrders = () => {
         let query = 
-        "SELECT u.username as 'orderedBy', uo.id, i.name, os.name AS 'status', os.id AS 'statusId' "+
+        "SELECT u.username as 'orderedBy', uo.id, DATE_FORMAT(uo.order_date, '%d/%l/%Y %H:%i:%s') as order_date, i.name, os.name AS 'status', os.id AS 'statusId' "+
         "FROM userOrders uo " +
         "LEFT JOIN items i " +
         "ON uo.itemId = i.id " +
@@ -161,8 +161,6 @@ module.exports = class DbContext{
     RemoveItem = (id) => {
         let query = "DELETE FROM items WHERE id = ?;"
         
-        console.log(query, id);
-
         return new Promise((resolve, reject) => 
         {
             this.connection.query(query, [id], (error, results) => 

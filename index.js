@@ -27,7 +27,9 @@ app.use(express.static('public'));
 
 let dbProvider = new DbProvider(dbConfig);
 
-require('./routes/route')(app, passport, dbProvider);
+require('./routes/users')(app, passport, dbProvider);
+require('./routes/items')(app, dbProvider);
+require('./routes/orders')(app, dbProvider);
 require('./passport')(passport, dbProvider);
 
 const port = 3000;
