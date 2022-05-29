@@ -26,6 +26,17 @@
                 </tr>
               </thead>
             <tbody>
+
+        <form action="/newItem" method="get">
+           
+            <input class="form-control" placeholder="Име" type="text" name="name"></input>
+            <input class="form-control" placeholder="Цена" type="text" name="price"></input>
+            <input class="form-control" placeholder="Адрес на снимка" type="text" name="url"></input>
+
+            <input type="submit" value="Добави нов продукт" class="btn btn-primary">
+        </form>
+
+
             <% for(let i = 0; i < items.length; i++) {%>
                 <tr>
                     <td><%= items[i].id %></td>

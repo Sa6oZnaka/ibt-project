@@ -129,15 +129,32 @@ module.exports = function(app, passport, dbProvider) {
     app.get('/newReview/:itemId', isLoggedIn, async function(req, res) {
         let itemId = req.params.itemId;
 
-        if(! req.params.inlineRadioOptions || ! req.params.text)
-            res.redirect('/');
-
         let text = req.query.text;
         let rating = parseInt(req.query.inlineRadioOptions);
 
+        if(rating == null)
+            res.redirect('/');
+
         await dbProvider.AddReview(req.user.id, itemId, rating, text);
 
-        //res.send("OK!!!");
+        res.redirect('/item/' + itemId);
+    });
+
+    app.get('/newItem', isLoggedIn, async function(req, res) {
+        if(req.user.isAdmin == 0){
+            res.redirect("/");
+        }
+        
+        let name = req.query.name;
+        let price = parseInt(req.query.price);
+        let url = req.query.url;
+
+        if(name != null && price != null && url != null)
+            res.redirect('/');
+
+        await dbProvider.AddItem(name, price, url);
+
+        res.redirect('/items');
     });
 };
 

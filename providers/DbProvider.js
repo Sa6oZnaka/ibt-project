@@ -145,4 +145,16 @@ module.exports = class DbContext{
             });
         });
     }
+
+    AddItem = (name, price, url) => {
+        let query = "INSERT INTO items (name, price, src) VALUES (?, ?, ?);"
+        
+        return new Promise((resolve, reject) => 
+        {
+            this.connection.query(query, [name, price, url], (error, results) => 
+            {
+                return resolve(results);
+            });
+        });
+    }
 }
